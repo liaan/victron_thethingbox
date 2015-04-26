@@ -1,0 +1,682 @@
+[
+    {
+        "id": "859db95b.7a6248",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "2400",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "newline": "85",
+        "bin": "bin",
+        "out": "time",
+        "addchar": true
+    },
+    {
+        "id": "67094cba.98f6b4",
+        "type": "inject",
+        "name": "Get Led Status",
+        "topic": "",
+        "payload": "L",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 152.42858123779297,
+        "y": 20,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "8cbe09cd.7341f8",
+        "type": "inject",
+        "name": "Get AC/DC/LED Info State",
+        "topic": "0",
+        "payload": "F",
+        "payloadType": "none",
+        "repeat": "0.2",
+        "crontab": "",
+        "once": true,
+        "x": 183.5238037109375,
+        "y": 273.25396728515625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "6d2cbdb4.92d344"
+            ]
+        ]
+    },
+    {
+        "id": "9abcc93c.654338",
+        "type": "inject",
+        "name": "Get MasterLED State",
+        "topic": "5",
+        "payload": "F",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 164.52383422851562,
+        "y": 65.53968811035156,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "cd835565.327ca8",
+        "type": "serial out",
+        "name": "Mk2_out",
+        "serial": "859db95b.7a6248",
+        "x": 1099.5714797973633,
+        "y": 29.142850875854492,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "710ec452.8ef13c",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1031.4127349853516,
+        "y": 96.74605178833008,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "b3918641.4c6e78",
+        "type": "function",
+        "name": "Make Command",
+        "func": "\ncmd = msg.payload;\ncmd = cmd.charCodeAt(0);\ndata = msg.topic\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\nif(data !==''){\n\tpacket.push(data);\n}\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n//checksum = 0xB3;\n\n\n//Add Checksum to end\npacket.push(checksum);\n\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 827.71435546875,
+        "y": 52.42856216430664,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "710ec452.8ef13c",
+                "cd835565.327ca8"
+            ]
+        ]
+    },
+    {
+        "id": "970ed10f.68f13",
+        "type": "change",
+        "action": "replace",
+        "property": "topic",
+        "from": "",
+        "to": "0",
+        "reg": false,
+        "name": "DC",
+        "x": 335.1111755371094,
+        "y": 139.50794982910156,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "4a5a9607.b5a568"
+            ]
+        ]
+    },
+    {
+        "id": "4a5a9607.b5a568",
+        "type": "delay",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "150",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 476.825439453125,
+        "y": 138.7936553955078,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "59acdf5a.a6532",
+        "type": "change",
+        "action": "replace",
+        "property": "topic",
+        "from": "",
+        "to": "1",
+        "reg": false,
+        "name": "AC",
+        "x": 334.2539978027344,
+        "y": 97.65081024169922,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "c0e0e618.3f1f18",
+        "type": "change",
+        "action": "replace",
+        "property": "payload",
+        "from": "",
+        "to": "L",
+        "reg": false,
+        "name": "LED",
+        "x": 333.111083984375,
+        "y": 185.22222900390625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "d01540ac.2feac"
+            ]
+        ]
+    },
+    {
+        "id": "d01540ac.2feac",
+        "type": "delay",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "350",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 476.111083984375,
+        "y": 186.22222900390625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "6d2cbdb4.92d344",
+        "type": "function",
+        "name": "Next Packet",
+        "func": "delete msg.payload;\nif(context.count == undefined || context.count > 3){\n\tcontext.count = 1\n}\nif(context.running == undefined){\n\tcontext.running = false;\n}\n//if already running, return .\nif(context.running === true){\n\treturn [null]\n}\ncontext.running = true;\n// AC\nif(context.count === 1){\n\tmsg.topic = 1;\n\tmsg.payload = \"F\";\n\t\n}\n//DC\nif(context.count === 2){\n\tmsg.topic = 0;\n\tmsg.payload = \"F\";\n\t\n}\nif(context.count === 3){\n\tmsg.topic = '';\n\tmsg.payload = \"L\";\n\t\n}\n\ncontext.count += 1\ncontext.running = false;\nreturn msg;",
+        "outputs": 1,
+        "x": 415.2221984863281,
+        "y": 272.2221984863281,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "c3691bde.3c96e8",
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "c3691bde.3c96e8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 577.2222290039062,
+        "y": 272.1111145019531,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "df784daa.2087b",
+        "type": "inject",
+        "name": "Manual Trigger",
+        "topic": "",
+        "payload": "F",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 154,
+        "y": 146,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "59acdf5a.a6532",
+                "970ed10f.68f13",
+                "c0e0e618.3f1f18"
+            ]
+        ]
+    },
+    {
+        "id": "7cbc4d0a.8343b4",
+        "type": "function",
+        "name": "Mk2: Decode LED String",
+        "func": "var leds = Array();\n\nleds[0] = {\n\tname : 'Mains',\n\tstatus : 0\n}\nleds[1] = {\n\tname : 'Absorpion',\n\tstatus : 0\n}\nleds[2] ={\n\tname : 'Bulk',\n\tstatus : 0\n}\nleds[3] = {\n\tname : 'Float',\n\tstatus : ''\n}\nleds[4] = {\n\tname : 'Inverter',\n\tstatus : ''\n}\nleds[5] = {\n\tname : 'Overload',\n\tstatus : ''\n}\nleds[6] = {\n\tname : 'Low Battery',\n\tstatus : ''\n}\nleds[7] = {\n\tname : 'Temperature',\n\tstatus : ''\n}\n\ndecode_on_off (msg.value[0])\ndecode_blinking(msg.value[1])\n\n//Assign LED array\nmsg.leds = leds;\n\n\n//Return\nreturn msg;\n\n\n/*\n* Decode LED on Off\n* \n*/\nfunction decode_on_off(value){\n\n\tfor(i=0;i<8;i++){\n\t\tleds[i]['status'] = (value & 1<<i)?'On':'Off';\n\t\tleds[i]['status_id'] = (value & 1<<i)?1:0;\n\t}\t\t\t\n\n\t\n}\n\n/*\n* Decode Blinking State\n*/\nfunction decode_blinking(value){\n\n\tfor(i=0;i<8;i++){\n\t\n\t\t (value & 1<<i) ? (leds[i]['status'] = 'Blinking'):'';\n\t\t (value & 1<<i) ? (leds[i]['status_id'] = 2):'';\t\t\n\t}\t\t\t\n\n}\n",
+        "outputs": 1,
+        "x": 743.0477294921875,
+        "y": 507.87298583984375,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "a512234b.5aede"
+            ]
+        ]
+    },
+    {
+        "id": "ea892022.1576e",
+        "type": "switch",
+        "name": "Switch MK2 packet type",
+        "property": "type",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1"
+            },
+            {
+                "t": "eq",
+                "v": "0"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 480.30169677734375,
+        "y": 497.15869140625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "7cbc4d0a.8343b4",
+                "f8e42e0b.071bd"
+            ],
+            [
+                "5a5cd55b.a5a32c"
+            ]
+        ]
+    },
+    {
+        "id": "a512234b.5aede",
+        "type": "function",
+        "name": "LED to emoncms",
+        "func": "var bla = {};\nvar newMsg = {};\nnewMsg.values = make_emoncms(msg.leds)\n\n//bla.nodegroup = \"ab\";\n//msg = bla;\nnewMsg.node = 0;\nnewMsg.packet_type = 3;\n\nreturn newMsg;\n\nfunction make_emoncms(leds){\n\t//var payload = \"1\";\n\tvar payload = {};\n\t//payload2 = {};\n\t\n\tleds.forEach(function (byte,index) {\n\t\t\n\t\tvar color = 10;\n\t\tswitch (byte.status_id)\n\t\t{\n\t\t\tcase 0: //off\n\t\t\t color = 10 //green\n\t\t\t break;\n\t\t\tcase 1://on\n\t\t\t  color=1\n\t\t\t break;\n\t\t\tcase 2://blink\n\t\t\t  color = 4\n\t\t\t  break\n\t\t\tdefault:\n\t\t\t color = 5\n\t\t\t break;\n\t\t}\n     // payload += ','+[byte.name]+':'+color\n\t  payload[byte.name] = color\n\t  \n\t})\n\treturn payload;\n\t//return JSON.stringify(payload);\n}",
+        "outputs": 1,
+        "x": 796.2857666015625,
+        "y": 662.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "bca9edcc.43561",
+                "73261369.8cd9ec"
+            ]
+        ]
+    },
+    {
+        "id": "7d1af7d8.82e508",
+        "type": "function",
+        "name": "Decode MK2 String",
+        "func": "\ncommand = String.fromCharCode(msg.payload[2]);\n\nchecksum = 0;\n\nfor (i=0;i<msg.payload.length;i++){\n  checksum = (checksum + msg.payload.readInt8(i))%0x100 ;\n}\nmsg.checksum = checksum\nif(checksum != 0){\n\treturn null\n}\n\nif(msg.payload[1] == 255){ \n\tswitch (command){\n\t\tcase \"L\": //LED Status\n\t\t\t\n\t\t\tmsg.type = 1;\t\t\n\t\t\tmsg.value = [msg.payload[3],msg.payload[4]];\n\t\t\t\n\t\tbreak;\n\t\tcase 'V': // Version\n\t\t  \n\t\t  msg.type = 2;\n\t\t  \n\t\t \n\t\tbreak;\n\t\tcase 'F':\t\t\n\t\t\tmsg.type = 3;\n\t\t\t\n\t\tbreak;\n\t\tdefault:\n\t\t\tmsg.type=0;\n\t\tbreak;\n\t}\n\treturn [msg,null,msg]\n}\n\n//Info Frame\nif(msg.payload[1] == 0x20){\n\t\n\treturn [null,msg,msg];\t\n}\n\n\n",
+        "outputs": "3",
+        "x": 263.71434020996094,
+        "y": 591.9999794960022,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "ea892022.1576e"
+            ],
+            [
+                "cc23a052.33dc6"
+            ],
+            [
+                "4e395bcf.b1c6a4"
+            ]
+        ]
+    },
+    {
+        "id": "f8e42e0b.071bd",
+        "type": "debug",
+        "name": "Debug Packet",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 687.3651123046875,
+        "y": 444.06353759765625,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "5a5cd55b.a5a32c",
+        "type": "debug",
+        "name": "Unkown Frame",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 600.2857666015625,
+        "y": 569.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "bca9edcc.43561",
+        "type": "debug",
+        "name": "Debug LED",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 968.2857666015625,
+        "y": 601.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "73261369.8cd9ec",
+        "type": "function",
+        "name": "Merge Packets",
+        "func": "\n//Set defaults if not set yet\nif(context.dc === undefined){\n\tcontext.dc = false;\n}\nif(context.led === undefined){\n\tcontext.ac = false;\n}\nif(context.packet === undefined){\n\tcontext.packet = {};\n}\nif(context.led === undefined){\n\tcontext.led = false;\n}\n\nif(msg.packet_type === 1){\n\n\tcontext.dc = true;\n}\n\nif (msg.packet_type === 2){\n\tcontext.ac = true;\n}\nif (msg.packet_type === 3){\n\tcontext.led = true;\n}\n\n\nObject.keys(msg.values).forEach(function(key) {\n  \t\tcontext.packet[key] = msg.values[key];\n\n});\n\n\n\nif(context.dc && context.ac && context.led){\n\t//var newMsg = { values: context.packet }\n    msg.values = context.packet;\n    context.ac = false;\n    context.dc = false;\n    delete context.packet;\n    \n\treturn msg;\n}else {\n\treturn [null]\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 1159,
+        "y": 864,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "c3d0adb7.3c2f5",
+                "66796d31.998694",
+                "52af12f1.7393c4"
+            ]
+        ]
+    },
+    {
+        "id": "e54ddba2.1ab228",
+        "type": "serial in",
+        "name": "Mk2",
+        "serial": "859db95b.7a6248",
+        "x": 62.71433639526367,
+        "y": 591.7142601013184,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "7d1af7d8.82e508",
+                "2b938963.d46c76"
+            ]
+        ]
+    },
+    {
+        "id": "cc23a052.33dc6",
+        "type": "function",
+        "name": "Decode Info Frame",
+        "func": "try{\nvar packet = Array();\nvar phase = msg.payload[2+4];\n\nswitch (phase){\n\tcase 0x0C: //DC\n\t\t//msg.values = decode_dc();\n\t\tmsg.type = 1;\n\t\tmsg.run = 'DC';\n\tbreak;\n\tcase 0x08: //AC L1\n\t\t//msg.values = decode_ac();\n\t\tmsg.run = 'ac';\n\t\tmsg.type = 2;\n\tbreak;\n\tdefault:\n\t\tmsg.run = 'Unkown packet'+ phase.charCodeAt(0);\n\tbreak;\n}\n\nreturn msg;\n\n\n}catch(e){\n\tconsole.log(e);\n\treturn msg;\n}",
+        "outputs": 1,
+        "x": 407.0000228881836,
+        "y": 811.0000324249268,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "648f4d5e.9b70b4",
+                "3eb1a61e.c14e5a"
+            ]
+        ]
+    },
+    {
+        "id": "4e395bcf.b1c6a4",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "checksum",
+        "x": 455,
+        "y": 721,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "a0a7d298.5f583",
+        "type": "function",
+        "name": "Decode AC Frame",
+        "func": "try {  \n\nmsg.values = decode_ac(msg.payload);\nmsg.type = 'Inverter AC'\nmsg.node = 1;\nmsg.packet_type = 2;\nreturn msg;\nfunction decode_ac(packet){\n\tvar ac = {\t\n\t\tbf_factor: packet.readInt8(2+0)\n\t    ,inverter_factor: packet.readUInt8(2+1)\n\t    ,mains_volt: packet.readInt16LE(2+5)/100\n\t\t,mains_current : packet.readInt16LE(2+7)/100 //((packet[2+7])+(packet[2+8]*255))/100\n\t\t,inverter_voltage : packet.readInt16LE(2+9)/100 //((packet[2+9])+(packet[2+10]*255))/100\n\t\t,inverter_current : packet.readInt16LE(2+11)/100 // ((packet[2+11])+(packet[2+12]*255))/100\n\t\t,mains_period : 10/packet.readUInt8(2+13)\n\t\t\n\t}\n\t\n\tac['mains_watts'] = (ac.mains_current * ac.mains_volt * ac.bf_factor);\n\tac['inverter_watts'] = (ac.inverter_voltage * ac.inverter_current * ac.inverter_factor);\n\tac['InverterWattsOut'] = ac['inverter_watts'] \n\t\n\treturn ac;\n}\n}catch(e){\nconsole.log(e)\n}",
+        "outputs": 1,
+        "x": 795.857177734375,
+        "y": 920.5714111328125,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "73261369.8cd9ec",
+                "e24761b5.0a17f8"
+            ]
+        ]
+    },
+    {
+        "id": "9bc3e872.643c18",
+        "type": "function",
+        "name": "Decode DC Frame",
+        "func": "try {\n\n\n\nmsg.values = decode_dc(msg.payload)\nmsg.type = 'Inverter DC'\nmsg.node = 1;\nmsg.packet_type = 1;\nreturn msg;\n\nfunction decode_dc(packet){\n\tvar dc = {\n\t\t\n\t\tbat_volt: packet.readInt16LE(2+5)/100 //cket[2+5])+packet[2+6]*255)/100\n\t\t,bat_current_used :  ((packet[2+7])+(packet[2+8]*255)+(packet[2+9]*255*255))/10\n\t\t,bat_current_charge : ((packet[2+10])+(packet[2+11]*255)+(packet[2+12]*255*255))/10\n\t\t,bat_inverter_period : 10/packet.readUInt8(2+13)\n\t}\n\t\n\tdc['bat_watts'] = (dc.bat_current_used * dc.bat_volt);\n\tdc['bat_charge_watts'] = (dc.bat_current_charge * dc.bat_volt);\n\t\n\treturn dc;\n}\n\n\n\n}\ncatch(e){\nconsole.log(e)\n}\n",
+        "outputs": 1,
+        "x": 793.857177734375,
+        "y": 738.5714111328125,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "73261369.8cd9ec",
+                "c8c00b1.f373ff8"
+            ]
+        ]
+    },
+    {
+        "id": "c3d0adb7.3c2f5",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1331,
+        "y": 866,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "66796d31.998694",
+        "type": "function",
+        "name": "Build EmonCMS url",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n//expects JSON payload and destination specified in topic\nvar diff = 0;\nif(context.lastrun !== undefined){\n\n\tdiff = (new Date()/1000) - context.lastrun;\n\n\tif(diff < 10)\n\t{\n\t\tbla = \"diff = \" + diff;\n\t\treturn [null,bla]\n\t}\n}\n\ncontext.lastrun = new Date()/1000;\n\n\nvar key = \"Enter Keyd\";\n\n//destination will be last part node of topic\nvar values = JSON.stringify(msg.values);;\nvar node = msg.node;\n//console.log(values);\n\nif(isNaN(node))\n{\n//not a valid destination\nreturn null;\n}\n\nmsg.url =\"http://emoncms.org/input/post.json?node=\";\nmsg.url += node;\nmsg.url += \"&json=\";\nmsg.url += values;\nmsg.url += \"&apikey=\";\nmsg.url += key;\n\nif(msg.timestamp !== undefined){\n\tmsg.url += \"&time=\"+msg.timestamp\n}else{\n\tmsg.url += \"&time=\"+Math.floor(Date.now() / 1000)\n}\n//console.log(msg.url);\n\nreturn [msg ,\"posted: \" +diff];",
+        "outputs": "2",
+        "x": 1292.607177734375,
+        "y": 742.0714721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "cd4034b9.32bfc8",
+                "242367fd.dbdc98"
+            ],
+            [
+                "e570a4c2.1a8f58"
+            ]
+        ]
+    },
+    {
+        "id": "52af12f1.7393c4",
+        "type": "function",
+        "name": "Emoncms Local on Monitor",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n//expects JSON payload and destination specified in topic\n\nvar key = \"Enter emoncmskey\";\n\n//destination will be last part node of topic\nvar values = JSON.stringify(msg.values);;\nvar node = msg.node;\n//console.log(values);\n\nif(isNaN(node))\n{\n//not a valid destination\nreturn null;\n}\n\nmsg.url =\"http://monitor/emoncms/input/post.json?node=\";\nmsg.url += node;\nmsg.url += \"&json=\";\nmsg.url += values;\nmsg.url += \"&apikey=\";\nmsg.url += key;\n\nif(msg.timestamp !== undefined){\n\tmsg.url += \"&time=\"+msg.timestamp\n}else{\n\tmsg.url += \"&time=\"+Math.floor(Date.now() / 1000)\n}\n//console.log(msg.url);\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 1298,
+        "y": 980,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "bb388df2.7dbbf8"
+            ]
+        ]
+    },
+    {
+        "id": "2b938963.d46c76",
+        "type": "debug",
+        "name": "Debug Serial",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 231.00006103515625,
+        "y": 671.2857055664062,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "648f4d5e.9b70b4",
+        "type": "switch",
+        "name": "",
+        "property": "type",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1"
+            },
+            {
+                "t": "eq",
+                "v": "2"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 587.8571701049805,
+        "y": 809.5714340209961,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "9bc3e872.643c18"
+            ],
+            [
+                "a0a7d298.5f583"
+            ]
+        ]
+    },
+    {
+        "id": "3eb1a61e.c14e5a",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 567.0000228881836,
+        "y": 930.4285488128662,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "e24761b5.0a17f8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 830,
+        "y": 859,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "c8c00b1.f373ff8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 834.857177734375,
+        "y": 809.3214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "cd4034b9.32bfc8",
+        "type": "http request",
+        "name": "HTTP GET to EmonCMS.org",
+        "method": "GET",
+        "url": "",
+        "x": 1543.52392578125,
+        "y": 663.8214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "6208d039.9df73"
+            ]
+        ]
+    },
+    {
+        "id": "242367fd.dbdc98",
+        "type": "function",
+        "name": "Debug EmonCMS URL",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n\nreturn msg.url;",
+        "outputs": 1,
+        "x": 1535.857177734375,
+        "y": 746.0714721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "5f91353a.a06ecc"
+            ]
+        ]
+    },
+    {
+        "id": "e570a4c2.1a8f58",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1506,
+        "y": 832,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "bb388df2.7dbbf8",
+        "type": "http request",
+        "name": "HTTP GET to EmonCMS",
+        "method": "GET",
+        "url": "",
+        "x": 1557.916748046875,
+        "y": 980.75,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "7b73ce2c.919588"
+            ]
+        ]
+    },
+    {
+        "id": "6208d039.9df73",
+        "type": "debug",
+        "name": "EmonCMS HTTP Request Result",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1832.52392578125,
+        "y": 657.6548461914062,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "5f91353a.a06ecc",
+        "type": "debug",
+        "name": "EmonCMS URL",
+        "active": false,
+        "complete": "true",
+        "x": 1752.107177734375,
+        "y": 737.3214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "7b73ce2c.919588",
+        "type": "debug",
+        "name": "EmonCMS HTTP Request Result",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1662.916748046875,
+        "y": 1098.5833740234375,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    }
+]
