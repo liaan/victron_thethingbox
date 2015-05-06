@@ -1,0 +1,2000 @@
+[
+    {
+        "type": "tab",
+        "id": "c3aed0d3.3ce58",
+        "label": "Flow"
+    },
+    {
+        "type": "tab",
+        "id": "8fe6146f.036ab8",
+        "label": "System"
+    },
+    {
+        "type": "tab",
+        "id": "ce411fbd.4a9528",
+        "label": "Envoy"
+    },
+    {
+        "type": "tab",
+        "id": "fe934024.23911",
+        "label": "W Commands"
+    },
+    {
+        "id": "87301c26.78cfe",
+        "type": "mqtt-broker",
+        "broker": "10.0.0.5",
+        "port": "1883",
+        "clientid": ""
+    },
+    {
+        "id": "859db95b.7a6248",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "2400",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "newline": "85",
+        "bin": "bin",
+        "out": "time",
+        "addchar": true
+    },
+    {
+        "id": "ba386057.845d3",
+        "type": "mqtt-broker",
+        "broker": "localhost",
+        "port": "1883"
+    },
+    {
+        "id": "a37a2fd.411bc5",
+        "type": "mqtt-broker",
+        "broker": "10.0.0.80",
+        "port": "1883",
+        "clientid": ""
+    },
+    {
+        "id": "53505222.4dcc24",
+        "type": "http in",
+        "name": "",
+        "url": "/form/change-hostname",
+        "method": "get",
+        "x": 167.5,
+        "y": 780,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "76ae3bc5.10133c"
+            ]
+        ]
+    },
+    {
+        "id": "97c72e9b.2cba48",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 780,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "76ae3bc5.10133c",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div class=\"form-row\">\n\t<label for=\"change-password-input\"><i class=\"icon-tag\"></i>\n\t\tName</label><input id=\"change-password-input\" type=\"text\" name=\"value\">\n</div>\n\t\n\n",
+        "x": 410,
+        "y": 780,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "97c72e9b.2cba48"
+            ]
+        ]
+    },
+    {
+        "id": "efa70ca9.a0e8b",
+        "type": "exec",
+        "command": "cat /etc/hostname",
+        "append": "",
+        "useSpawn": "",
+        "name": "",
+        "x": 444.5,
+        "y": 209,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "5c747b17.7bc6e4"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ce6187c5.f08d48",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 260,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "8daa6a5.6bcd898",
+        "type": "http in",
+        "name": "",
+        "url": "/form/current-hostname",
+        "method": "get",
+        "x": 166.5,
+        "y": 209,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "efa70ca9.a0e8b"
+            ]
+        ]
+    },
+    {
+        "id": "f8783c1e.9171f",
+        "type": "http in",
+        "name": "",
+        "url": "/form/navbar",
+        "method": "get",
+        "x": 132.5,
+        "y": 80,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "a917e514.5165e"
+            ]
+        ]
+    },
+    {
+        "id": "4ae570a1.7691d",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 80,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "a917e514.5165e",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div id=\"header\">\n\t<div id=\"notifications\"></div>\n    <span class=\"logo\">\n\t\t<a target=\"_blank\" href=\"http://thethingbox.io\"><img src=\"/bee.png\" style=\"height: 30px;\"><span> The ThingBox </span></a>\t\n\t\t<span>&nbsppowered by&nbsp</span>\n\t</span>\n    <span class=\"logo\">\n\t\t<a target=\"_blank\" href=\"http://nodered.org/\"><img src=\"/node-red.png\"> <span>Node-RED</span></a>\n\t</span>\n    <div class=\"pull-right\">\n        <a id=\"btn-sidemenu\" class=\"button dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><i class=\"fa fa-bars\"></i></a>\n    </div>\n</div>",
+        "x": 390,
+        "y": 80,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "4ae570a1.7691d"
+            ]
+        ]
+    },
+    {
+        "id": "9fb8cf7b.54717",
+        "type": "http in",
+        "name": "",
+        "url": "/form/wifi",
+        "method": "get",
+        "x": 120,
+        "y": 300,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "4ec883e4.8aac74"
+            ]
+        ]
+    },
+    {
+        "id": "911596a6.931158",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 300,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "4ec883e4.8aac74",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div aria-labelledby=\"ui-id-4\" aria-describedby=\"dialog\" role=\"dialog\"\n\ttabindex=\"-1\"\n\tclass=\"setting-board ui-dialog ui-widget ui-widget-content\">\n\n\t<div\n\t\tclass=\"ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix\">\n\t\t<span class=\"ui-dialog-title\" id=\"ui-id-4\">WiFi</span>\n\t</div>\n\t<div\n\t\tstyle=\"display: block; width: auto; min-height: 26px; max-height: none; height: auto;\"\n\t\tid=\"dialog\" class=\"hide ui-dialog-content ui-widget-content\">\n\t\t<form id=\"wifi-form\" class=\"form-horizontal\"\n\t\t\taction=\"/api/handle/wifilist\">\n\n\t\t\t<div id=\"current-wifi-container\"></div>\n\n\t\t\t<div id=\"wifilist-container\"></div>\n\n\t\t\t<div class=\"form-tips\">\n\t\t\t\t<b>Note:</b> Reboot your box to apply.\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\n\n\t<div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\">\n\t\t<div class=\"ui-dialog-buttonset\">\n\t\t\t<button aria-disabled=\"false\" role=\"button\"\n\t\t\t\tclass=\"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\"\n\t\t\t\ttype=\"submit\" form=\"wifi-form\">\n\t\t\t\t<span class=\"ui-button-text\">Ok</span>\n\t\t\t</button>\n\t\t</div>\n\t\t\n\n\t\t\n\t</div>\n\n</div>\n\n\n<div id='result-wifilist'></div>\n<script>\n\t$(\"#current-wifi-container\").load(\"current-wifi\");\n\t$(\"#wifilist-container\").load(\"wifilist\");\n\n\t$('#wifi-form').submit(function(event){\n\t\t\t\t\n\t\t\t\tvar $this = $(this);\n\t\t\t\t\n\t\t\t\tevent.preventDefault();\n\t\t\t\t$('input[name=\"usingAJAX\"]',this).val( 'true' );\n\t\t\t\tvar url = $this.attr('action');\n\t\t\t\tvar dataToSend = $this.serialize();\n\t\t\t\tvar callback = function(dataReceived){\n\t\t\t\t\tRED.notify(dataReceived,\"success\");\n\t\t\t\t};\n\t\t\t\tvar typeOfDataToReceive = 'html';\n\t\t\t\t$.get( url, dataToSend, callback, typeOfDataToReceive )\n\t\t\t});\n</script>\n\n",
+        "x": 410,
+        "y": 300,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "911596a6.931158"
+            ]
+        ]
+    },
+    {
+        "id": "f8018c86.ad1298",
+        "type": "http in",
+        "name": "",
+        "url": "/form/current-wifi",
+        "method": "get",
+        "x": 145,
+        "y": 340,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "6c95f5bf.42af0c"
+            ]
+        ]
+    },
+    {
+        "id": "16f68de1.99c99a",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 380,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "af2966e0.d8a4c",
+        "type": "ejs",
+        "name": "",
+        "ejs": "\n\n\n\n<div id=\"current-wifi\"><span class=\"icon-signal\"></span> Current wifi connected is : <code><%= payload.essid %></code></div></br>\n",
+        "x": 410,
+        "y": 380,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "16f68de1.99c99a"
+            ]
+        ]
+    },
+    {
+        "id": "6c95f5bf.42af0c",
+        "type": "currentwifi",
+        "name": "",
+        "x": 420.5,
+        "y": 340,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "af2966e0.d8a4c"
+            ]
+        ]
+    },
+    {
+        "id": "7628fbbf.84ea1c",
+        "type": "http in",
+        "name": "",
+        "url": "/form/wifilist",
+        "method": "get",
+        "x": 128.5,
+        "y": 420,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "bcb6d38.2a538b"
+            ]
+        ]
+    },
+    {
+        "id": "9688ff55.41d82",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 460,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "bcb6d38.2a538b",
+        "type": "wifilist",
+        "name": "name",
+        "x": 410,
+        "y": 420,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "72e10b0d.e0ffc4"
+            ]
+        ]
+    },
+    {
+        "id": "72e10b0d.e0ffc4",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div id=\"wifilist\">\n\t\n\t<div class=\"form-row\">\n\t\t<label for=\"wifilist-ssid\"><i class=\"icon-tag\"></i>\n\t\t\tssid</label><select id=\"wifilist-ssid\" name=\"ssid\">\n\t\t\t<% payload.forEach(function(wifi) { %>\n\t\t\t<option name=\"<%=wifi.essid%>\"> <%=wifi.essid%></option> <%\n\t\t\t}) %>\n\t\t</select>\n\t</div>\n\t\n\t<div class=\"form-row\">\n\t\t<label for=\"wifilist-password\"><i class=\"icon-lock\"></i>\n\t\t\tpassword</label><input id=\"wifilist-password\" type=\"text\" name=\"password\">\n\t</div>\n\t\n</div>",
+        "x": 410,
+        "y": 460,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "9688ff55.41d82"
+            ]
+        ]
+    },
+    {
+        "id": "9bd663bf.051018",
+        "type": "ejs",
+        "name": "Setting Form",
+        "ejs": "<!DOCTYPE HTML>\n<html>\n<title>Settings</title>\n<script src=\"http://code.jquery.com/jquery-1.10.2.js\"></script>\n<link href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\" media=\"screen\">\n<link href=\"/jquery/css/smoothness/jquery-ui-1.10.3.custom.min.css\" rel=\"stylesheet\" media=\"screen\">\n<link rel=\"stylesheet\" href=\"/style.css\">\n\n<style>\n\n.navbar-fixed-top {\n\tposition: fixed !important;\n}\n.setting-board {\n\tposition: static;\n}\n\n.setting-edit-container {\n\tpadding: 10px;\n\tmargin: 23px;\n\twidth: 750px;\n}\n</style>\n\n<script>\nfunction load() {\n\t$(\"#hostname-container\").load(\"hostname\");\n\t$(\"#wifi-container\").load(\"wifi\");\n\t$(\"#static_ip-container\").load(\"static_ip\");\n}\n\n$(document).ready(function(){\n\t$(\"#navbar-container\").load(\"navbar\");\n\tload();\n});\n</script>\n\n<div id=\"navbar-container\"><div id=\"notifications\"></div></div>\n\n\n\t<div id=\"hostname-container\" class=\"setting-edit-container\"></div>\n\t<div id=\"wifi-container\" class=\"setting-edit-container\"></div>\n\t<div id=\"static_ip-container\" class=\"setting-edit-container\"></div>\n\n\n\n<script>\n\tvar RED = {};\n</script>\n<script src=\"/red/ui/notifications.js\"></script>\n</html>",
+        "x": 410,
+        "y": 40,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "8f93923e.9b8578"
+            ]
+        ]
+    },
+    {
+        "id": "d506a29c.44c5",
+        "type": "http in",
+        "name": "",
+        "url": "/form/settings",
+        "method": "get",
+        "x": 135,
+        "y": 40,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "9bd663bf.051018"
+            ]
+        ]
+    },
+    {
+        "id": "8f93923e.9b8578",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 40,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "aad47f5f.ec3c9",
+        "type": "http in",
+        "name": "",
+        "url": "/form/hostname",
+        "method": "get",
+        "x": 141.5,
+        "y": 640,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "3b78840e.6bc984"
+            ]
+        ]
+    },
+    {
+        "id": "d8aeb04.67843d",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 640,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "3b78840e.6bc984",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div aria-labelledby=\"ui-id-4\" aria-describedby=\"dialog\" role=\"dialog\"\n\ttabindex=\"-1\"\n\tclass=\"setting-board ui-dialog ui-widget ui-widget-content\">\n\n\t<div\n\t\tclass=\"ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix\">\n\t\t<span class=\"ui-dialog-title\" id=\"ui-id-4\">ThingBox Name</span>\n\t</div>\n\t<div\n\t\tstyle=\"display: block; width: auto; min-height: 26px; max-height: none; height: auto;\"\n\t\tid=\"dialog\" class=\"hide ui-dialog-content ui-widget-content\">\n\t\t<form id=\"hostname-form\" class=\"form-horizontal\"\n\t\t\taction=\"/api/handle/change-hostname\">\n\t\t\t\n\t\t\t<div id=\"current-hostname-container\"></div></br>\n\t\t\t<div id=\"change-hostname-container\"></div>\n\n\t\t\t<div class=\"form-tips\">\n\t\t\t\t<b>Note:</b> Reboot your box to apply.\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\t<div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\">\n\t\t<div class=\"ui-dialog-buttonset\">\n\t\t\t<button aria-disabled=\"false\" role=\"button\"\n\t\t\t\tclass=\"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\"\n\t\t\t\ttype=\"submit\" form=\"hostname-form\">\n\t\t\t\t<span class=\"ui-button-text\">Ok</span>\n\t\t\t</button>\n\t\t</div>\n\t</div>\n\n</div>\n\n<div id=\"ttb-name\"></div>\n\n\n<script>\n//\t$(\"#current-hostname-container\").load(\"current-hostname\");\n//\t$(\"#change-hostname-container\").load(\"change-hostname\");\n\t$(\"#change-hostname-container\").load(\"change-hostname\", function() {\n\t\t$.ajax({\n\t       url : 'current-hostname',\n\t       type : 'GET',\n\t       dataType : 'html',\n\t           success : function(code_html, statut){\n\t           \tcode_html;\n\t\t\t\t$(\"#change-password-input\").val(code_html);\n\t           },\n\t           error : function(result, statut, error){\n\t\t\t\talert(error);\n\t           }\n\t    });\n\t});\n\n\n\t\t$('#hostname-form').submit(function(event){\n\t\t\t\t\n\t\t\t\tvar $this = $(this);\n\t\t\t\t\n\t\t\t\tevent.preventDefault();\n\t\t\t\t$('input[name=\"usingAJAX\"]',this).val( 'true' );\n\t\t\t\tvar url = $this.attr('action');\n\t\t\t\tvar dataToSend = $this.serialize();\n\t\t\t\tvar callback = function(dataReceived){\n\t\t\t\t\tRED.notify(dataReceived,\"success\");\n\t\t\t\t};\n\t\t\t\tvar typeOfDataToReceive = 'html';\n\t\t\t\t$.get( url, dataToSend, callback, typeOfDataToReceive )\n\t\t\t});\n\n\n</script>\n\n",
+        "x": 410,
+        "y": 640,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "d8aeb04.67843d"
+            ]
+        ]
+    },
+    {
+        "id": "df222521.7bf818",
+        "type": "http in",
+        "name": "",
+        "url": "/form/static_ip",
+        "method": "get",
+        "x": 136.5,
+        "y": 500,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "16fc7722.cefe11"
+            ]
+        ]
+    },
+    {
+        "id": "fe99f7a5.b6ba2",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 500,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "16fc7722.cefe11",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<div aria-labelledby=\"ui-id-4\" aria-describedby=\"dialog\" role=\"dialog\"\n\ttabindex=\"-1\"\n\tclass=\"setting-board ui-dialog ui-widget ui-widget-content\">\n\n\t<div\n\t\tclass=\"ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix\">\n\t\t<span class=\"ui-dialog-title\" id=\"ui-id-4\">Static IP</span>\n\t</div>\n\t<div\n\t\tstyle=\"display: block; width: auto; min-height: 26px; max-height: none; height: auto;\"\n\t\tid=\"dialog\" class=\"hide ui-dialog-content ui-widget-content\">\n\t\t<form id=\"static_ip-form\" class=\"form-horizontal\"\n\t\t\taction=\"/api/handle/static_ip\">\n\t\n\t<div class=\"form-row\">\n\t\t<label for=\"static_ip-iface\"><i class=\"icon-tag\"></i>\n\t\t\tInterface</label><select id=\"static_ip-iface-input\" name=\"iface\">\n\t\t\t<option value=\"eth0\">Ethernet</option>\n\t\t\t<option value=\"wlan0\">WiFi</option>\n\t\t</select>\n\t</div>\n\t<div class=\"form-row\">\n\t\t<label for=\"static_ip-type-input\"><i class=\"icon-tag\"></i>\n\t\t\tType</label><select id=\"static_ip-type-input\" name=\"type\">\n\t\t\t<option value=\"static\">Static</option>\n\t\t\t<option value=\"dynamic\">Dynamic</option>\n\t\t</select>\n\t</div>\n\t<div class=\"form-row static-properties\">\n\t\t<label for=\"static_ip-ip\">\n\t\t\t<i class=\"icon-tag\"></i>IP\n\t\t</label>\n\t\t<input id=\"static_ip-ip\" type=\"text\" name=\"ip\" placeholder=\"192.168.0.42\">\n\t</div>\n\t<div class=\"form-row static-properties\">\n\t\t<label for=\"static_ip-netmask\">\n\t\t\t<i class=\"icon-tag\"></i>Netmask\n\t\t</label>\n\t\t<input id=\"static_ip-netmask\" type=\"text\" name=\"netmask\" placeholder=\"255.255.255.0\">\n\t</div>\n\t<div class=\"form-row static-properties\">\n\t\t<label for=\"static_ip-gateway\">\n\t\t\t<i class=\"icon-tag\"></i>Gateway\n\t\t</label>\n\t\t<input id=\"static_ip-netmask\" type=\"text\" name=\"gateway\" placeholder=\"192.168.0.254\">\n\t</div>\n\n\t\t\t<div class=\"form-tips\">\n\t\t\t\t<b>Note:</b> Reboot your box to apply.\n\t\t\t</div>\n\t\t</form>\n\t</div>\n\n\n\t<div class=\"ui-dialog-buttonpane ui-widget-content ui-helper-clearfix\">\n\t\t<div class=\"ui-dialog-buttonset\">\n\t\t\t<button aria-disabled=\"false\" role=\"button\"\n\t\t\t\tclass=\"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\"\n\t\t\t\ttype=\"submit\" form=\"static_ip-form\">\n\t\t\t\t<span class=\"ui-button-text\">Ok</span>\n\t\t\t</button>\n\t\t</div>\n\t\t\n\n\t\t\n\t</div>\n\n</div>\n\n<script>\n\n$(\"#static_ip-type-input\").change(function(){\n\tvar val = $(this).val();\n\t\t\n\t\tif(val === \"dynamic\"){\n\t\t\t$('.static-properties').hide();\n\t\t}\n\t\telse {\n\t\t\t$('.static-properties').show();\n\t\t}\n});\n\n\t$('#static_ip-form').submit(function(event){\n\t\t\t\t\n\t\t\t\tvar $this = $(this);\n\t\t\t\t\n\t\t\t\tevent.preventDefault();\n\t\t\t\t$('input[name=\"usingAJAX\"]',this).val( 'true' );\n\t\t\t\tvar url = $this.attr('action');\n\t\t\t\tvar dataToSend = $this.serialize();\n\t\t\t\tvar callback = function(dataReceived){\n\t\t\t\t\tRED.notify(dataReceived,\"success\");\n\t\t\t\t};\n\t\t\t\tvar typeOfDataToReceive = 'html';\n\t\t\t\t$.get( url, dataToSend, callback, typeOfDataToReceive )\n\t\t\t});\n</script>\n\n",
+        "x": 410,
+        "y": 500,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "fe99f7a5.b6ba2"
+            ]
+        ]
+    },
+    {
+        "id": "5c747b17.7bc6e4",
+        "type": "ejs",
+        "name": "",
+        "ejs": "<%= payload %>",
+        "x": 410,
+        "y": 260,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "ce6187c5.f08d48"
+            ]
+        ]
+    },
+    {
+        "id": "eb3fae6e.ff50b",
+        "type": "http in",
+        "name": "",
+        "url": "/handle/change-hostname",
+        "method": "get",
+        "x": 175,
+        "y": 720,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "61920285.ad9c0c",
+                "7124270e.7c472"
+            ]
+        ]
+    },
+    {
+        "id": "848b882a.9b6d18",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 680,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "61920285.ad9c0c",
+        "type": "function",
+        "name": "parse query",
+        "func": "\n\n//console.log(JSON.stringify(msg.req.query));\n\n//console.log(JSON.stringify(msg.req.query.value));\n\nreturn {payload: msg.req.query.value};",
+        "outputs": 1,
+        "x": 426.5,
+        "y": 740,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "d8927586.fbf548"
+            ]
+        ]
+    },
+    {
+        "id": "d8927586.fbf548",
+        "type": "file",
+        "name": "write",
+        "filename": "/etc/hostname",
+        "appendNewline": false,
+        "overwriteFile": true,
+        "x": 650,
+        "y": 740,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "e9f64dcb.e44848",
+        "type": "http in",
+        "name": "",
+        "url": "/handle/wifilist",
+        "method": "get",
+        "x": 136,
+        "y": 920,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "ffe287be.b46488",
+                "8a5693c4.dccb08"
+            ]
+        ]
+    },
+    {
+        "id": "d8614806.198b18",
+        "type": "http response",
+        "name": "",
+        "x": 650,
+        "y": 920,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "ffe287be.b46488",
+        "type": "function",
+        "name": "parse query",
+        "func": "\nreturn {\n\tssid: msg.req.query.ssid,\n\tpassword: msg.req.query.password,\n};",
+        "outputs": 1,
+        "x": 426.5,
+        "y": 960,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "b65a8077.a24e9"
+            ]
+        ]
+    },
+    {
+        "id": "3a8ed507.48da42",
+        "type": "file",
+        "name": "write",
+        "filename": "/etc/wpa_supplicant/wpa_supplicant.conf",
+        "appendNewline": false,
+        "overwriteFile": true,
+        "x": 1069,
+        "y": 1053,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "a846ad78.2a5078",
+        "type": "template",
+        "name": "/etc/wpa_supplicant/wpa_supplicant.conf",
+        "template": "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n        ssid=\"{{ssid}}\"\n        key_mgmt=NONE\n}\n",
+        "x": 695.5,
+        "y": 973,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "dc5bc336.638358"
+            ]
+        ]
+    },
+    {
+        "id": "dfccf6ed.93f1b",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1069,
+        "y": 1013,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "d5f8774d.aa55b",
+        "type": "comment",
+        "name": "WiFi",
+        "info": "",
+        "x": 89,
+        "y": 873,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "8dabdbbe.3b73f8",
+        "type": "comment",
+        "name": "Name",
+        "info": "",
+        "x": 90,
+        "y": 580,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "b65a8077.a24e9",
+        "type": "switch",
+        "name": "protected ?",
+        "property": "password",
+        "rules": [
+            {
+                "t": "eq",
+                "v": 0,
+                "v2": 0
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "outputs": 2,
+        "x": 423.5,
+        "y": 1013,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "a846ad78.2a5078"
+            ],
+            [
+                "1435af4c.cd2161"
+            ]
+        ]
+    },
+    {
+        "id": "1435af4c.cd2161",
+        "type": "template",
+        "name": "/etc/wpa_supplicant/wpa_supplicant.conf",
+        "template": "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n        ssid=\"{{ssid}}\"\n        psk=\"{{password}}\"\n        key_mgmt=WPA-PSK\n}",
+        "x": 695.5,
+        "y": 1053,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "dc5bc336.638358"
+            ]
+        ]
+    },
+    {
+        "id": "dc5bc336.638358",
+        "type": "function",
+        "name": "nothing",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "x": 931,
+        "y": 1013,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "3a8ed507.48da42",
+                "dfccf6ed.93f1b"
+            ]
+        ]
+    },
+    {
+        "id": "7124270e.7c472",
+        "type": "ejs",
+        "name": "",
+        "ejs": "write successfully.",
+        "x": 410,
+        "y": 680,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "848b882a.9b6d18"
+            ]
+        ]
+    },
+    {
+        "id": "8a5693c4.dccb08",
+        "type": "ejs",
+        "name": "",
+        "ejs": "write successfully.",
+        "x": 410,
+        "y": 920,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "d8614806.198b18"
+            ]
+        ]
+    },
+    {
+        "id": "2f85ae2a.445a52",
+        "type": "http in",
+        "name": "",
+        "url": "/handle/static_ip",
+        "method": "get",
+        "x": 143,
+        "y": 1113,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "33c03efa.a1be62",
+                "582e704e.a5b398"
+            ]
+        ]
+    },
+    {
+        "id": "ba2474fd.627fb",
+        "type": "http response",
+        "name": "",
+        "x": 668.5,
+        "y": 1106,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "33c03efa.a1be62",
+        "type": "ejs",
+        "name": "",
+        "ejs": "write successfully.",
+        "x": 408.5,
+        "y": 1106,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "ba2474fd.627fb"
+            ]
+        ]
+    },
+    {
+        "id": "582e704e.a5b398",
+        "type": "function",
+        "name": "parse query",
+        "func": "\nreturn {\n\tpayload: msg.req.query\n};",
+        "outputs": 1,
+        "x": 425.5,
+        "y": 1153,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "263c2485.5c293c"
+            ]
+        ]
+    },
+    {
+        "id": "263c2485.5c293c",
+        "type": "interfaces",
+        "name": "",
+        "x": 678.5,
+        "y": 1153,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "affeffee.23da58",
+        "type": "comment",
+        "name": "Static IP",
+        "info": "",
+        "x": 89,
+        "y": 1073,
+        "z": "8fe6146f.036ab8",
+        "wires": []
+    },
+    {
+        "id": "e60ce42c.4739f8",
+        "type": "exec",
+        "command": "systemctl restart thethingbox.service",
+        "append": "",
+        "useSpawn": "",
+        "name": "",
+        "x": 503,
+        "y": 1220,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "restart",
+        "type": "inject",
+        "name": "Restart Node-RED",
+        "topic": "",
+        "payload": "",
+        "payloadType": "none",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 123.5,
+        "y": 1220,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "e60ce42c.4739f8"
+            ]
+        ]
+    },
+    {
+        "id": "719fbd2d.56e974",
+        "type": "exec",
+        "command": "reboot",
+        "append": "",
+        "useSpawn": "",
+        "name": "",
+        "x": 405,
+        "y": 1279,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "reboot",
+        "type": "inject",
+        "name": "Reboot",
+        "topic": "",
+        "payload": "",
+        "payloadType": "none",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 90,
+        "y": 1280,
+        "z": "8fe6146f.036ab8",
+        "wires": [
+            [
+                "719fbd2d.56e974"
+            ]
+        ]
+    },
+    {
+        "id": "e54ddba2.1ab228",
+        "type": "serial in",
+        "name": "Mk2",
+        "serial": "859db95b.7a6248",
+        "x": 62.71433639526367,
+        "y": 591.7142601013184,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "2b938963.d46c76",
+                "7d1af7d8.82e508"
+            ]
+        ]
+    },
+    {
+        "id": "2b938963.d46c76",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 229.0000457763672,
+        "y": 642.2856817245483,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "67094cba.98f6b4",
+        "type": "inject",
+        "name": "Get Led Status",
+        "topic": "",
+        "payload": "L",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 152.42858123779297,
+        "y": 20,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "6163884c.9e9c78",
+        "type": "template",
+        "name": "Make Packet",
+        "field": "payload",
+        "template": "{{#leds}}\n\n{{name}} is {{status}}\n\n{{/leds}}",
+        "x": 1014.285888671875,
+        "y": 422.2856750488281,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "560df0c3.a9f21"
+            ]
+        ]
+    },
+    {
+        "id": "7d1af7d8.82e508",
+        "type": "function",
+        "name": "Decode MK2 String",
+        "func": "\ncommand = String.fromCharCode(msg.payload[2]);\n\nchecksum = 0;\n\nfor (i=0;i<msg.payload.length;i++){\n  checksum = (checksum + msg.payload.readInt8(i))%0x100 ;\n}\nmsg.checksum = checksum\nif(checksum != 0){\n\treturn null\n}\n\nif(msg.payload[1] == 255){ \n\tswitch (command){\n\t\tcase \"L\": //LED Status\n\t\t\t\n\t\t\tmsg.type = 1;\t\t\n\t\t\tmsg.value = [msg.payload[3],msg.payload[4]];\n\t\t\t\n\t\tbreak;\n\t\tcase 'V': // Version\n\t\t  \n\t\t  msg.type = 2;\n\t\t  \n\t\t \n\t\tbreak;\n\t\tcase 'F':\t\t\n\t\t\tmsg.type = 3;\n\t\t\t\n\t\tbreak;\n\t\tdefault:\n\t\t\tmsg.type=0;\n\t\tbreak;\n\t}\n\treturn [msg,null,msg]\n}\n\n//Info Frame\nif(msg.payload[1] == 0x20){\n\t\n\treturn [null,msg,msg];\t\n}\n\n\n",
+        "outputs": "3",
+        "x": 263.71434020996094,
+        "y": 591.9999794960022,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "ea892022.1576e"
+            ],
+            [
+                "cc23a052.33dc6"
+            ],
+            [
+                "4e395bcf.b1c6a4"
+            ]
+        ]
+    },
+    {
+        "id": "f8e42e0b.071bd",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 668.3651123046875,
+        "y": 461.06353759765625,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "ea892022.1576e",
+        "type": "switch",
+        "name": "Switch MK2 packet type",
+        "property": "type",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1"
+            },
+            {
+                "t": "eq",
+                "v": "0"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 480.30169677734375,
+        "y": 497.15869140625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "f8e42e0b.071bd",
+                "7cbc4d0a.8343b4"
+            ],
+            [
+                "5a5cd55b.a5a32c"
+            ]
+        ]
+    },
+    {
+        "id": "560df0c3.a9f21",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 1187.857177734375,
+        "y": 425.71429443359375,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "7cbc4d0a.8343b4",
+        "type": "function",
+        "name": "Mk2: Decode LED String",
+        "func": "var leds = Array();\n\nleds[0] = {\n\tname : 'Mains',\n\tstatus : 0\n}\nleds[1] = {\n\tname : 'Absorpion',\n\tstatus : 0\n}\nleds[2] ={\n\tname : 'Bulk',\n\tstatus : 0\n}\nleds[3] = {\n\tname : 'Float',\n\tstatus : ''\n}\nleds[4] = {\n\tname : 'Inverter',\n\tstatus : ''\n}\nleds[5] = {\n\tname : 'Overload',\n\tstatus : ''\n}\nleds[6] = {\n\tname : 'Low Battery',\n\tstatus : ''\n}\nleds[7] = {\n\tname : 'Temperature',\n\tstatus : ''\n}\n\ndecode_on_off (msg.value[0])\ndecode_blinking(msg.value[1])\n\n//Assign LED array\nmsg.leds = leds;\n\n\n//Return\nreturn msg;\n\n\n/*\n* Decode LED on Off\n* \n*/\nfunction decode_on_off(value){\n\n\tfor(i=0;i<8;i++){\n\t\tleds[i]['status'] = (value & 1<<i)?'On':'Off';\n\t\tleds[i]['status_id'] = (value & 1<<i)?1:0;\n\t}\t\t\t\n\n\t\n}\n\n/*\n* Decode Blinking State\n*/\nfunction decode_blinking(value){\n\n\tfor(i=0;i<8;i++){\n\t\n\t\t (value & 1<<i) ? (leds[i]['status'] = 'Blinking'):'';\n\t\t (value & 1<<i) ? (leds[i]['status_id'] = 2):'';\t\t\n\t}\t\t\t\n\n}\n",
+        "outputs": 1,
+        "x": 743.0477294921875,
+        "y": 507.87298583984375,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "6163884c.9e9c78",
+                "a512234b.5aede"
+            ]
+        ]
+    },
+    {
+        "id": "8cbe09cd.7341f8",
+        "type": "inject",
+        "name": "Get AC/DC/LED Info State",
+        "topic": "0",
+        "payload": "F",
+        "payloadType": "none",
+        "repeat": "0.2",
+        "crontab": "",
+        "once": false,
+        "x": 183.5238037109375,
+        "y": 273.25396728515625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "6d2cbdb4.92d344"
+            ]
+        ]
+    },
+    {
+        "id": "9abcc93c.654338",
+        "type": "inject",
+        "name": "Get MasterLED State",
+        "topic": "5",
+        "payload": "F",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 164.52383422851562,
+        "y": 65.53968811035156,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "5a5cd55b.a5a32c",
+        "type": "debug",
+        "name": "Unkown Frame",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 600.2857666015625,
+        "y": 569.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "bca9edcc.43561",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 923.2857666015625,
+        "y": 600.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "a512234b.5aede",
+        "type": "function",
+        "name": "LED to emoncms",
+        "func": "var bla = {};\nvar newMsg = {};\nnewMsg.values = make_emoncms(msg.leds)\n\n//bla.nodegroup = \"ab\";\n//msg = bla;\nnewMsg.node = 0;\nnewMsg.packet_type = 3;\n\nreturn newMsg;\n\nfunction make_emoncms(leds){\n\t//var payload = \"1\";\n\tvar payload = {};\n\t//payload2 = {};\n\t\n\tleds.forEach(function (byte,index) {\n\t\t\n\t\tvar color = 10;\n\t\tswitch (byte.status_id)\n\t\t{\n\t\t\tcase 0: //off\n\t\t\t color = 10 //green\n\t\t\t break;\n\t\t\tcase 1://on\n\t\t\t  color=1\n\t\t\t break;\n\t\t\tcase 2://blink\n\t\t\t  color = 4\n\t\t\t  break\n\t\t\tdefault:\n\t\t\t color = 5\n\t\t\t break;\n\t\t}\n     // payload += ','+[byte.name]+':'+color\n\t  payload[byte.name] = color\n\t  \n\t})\n\treturn payload;\n\t//return JSON.stringify(payload);\n}",
+        "outputs": 1,
+        "x": 796.2857666015625,
+        "y": 662.1428833007812,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "bca9edcc.43561",
+                "73261369.8cd9ec"
+            ]
+        ]
+    },
+    {
+        "id": "cc23a052.33dc6",
+        "type": "function",
+        "name": "Decode Info Frame",
+        "func": "try{\nvar packet = Array();\nvar phase = msg.payload[2+4];\n\nswitch (phase){\n\tcase 0x0C: //DC\n\t\t//msg.values = decode_dc();\n\t\tmsg.type = 1;\n\t\tmsg.run = 'DC';\n\tbreak;\n\tcase 0x08: //AC L1\n\t\t//msg.values = decode_ac();\n\t\tmsg.run = 'ac';\n\t\tmsg.type = 2;\n\tbreak;\n\tdefault:\n\t\tmsg.run = 'Unkown packet'+ phase.charCodeAt(0);\n\tbreak;\n}\n\nreturn msg;\n\n\n}catch(e){\n\tconsole.log(e);\n\treturn msg;\n}",
+        "outputs": 1,
+        "x": 407.0000228881836,
+        "y": 811.0000324249268,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "648f4d5e.9b70b4",
+                "3eb1a61e.c14e5a"
+            ]
+        ]
+    },
+    {
+        "id": "648f4d5e.9b70b4",
+        "type": "switch",
+        "name": "",
+        "property": "type",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1"
+            },
+            {
+                "t": "eq",
+                "v": "2"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 587.8571701049805,
+        "y": 809.5714340209961,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "9bc3e872.643c18"
+            ],
+            [
+                "a0a7d298.5f583"
+            ]
+        ]
+    },
+    {
+        "id": "a0a7d298.5f583",
+        "type": "function",
+        "name": "Decode AC Frame",
+        "func": "try {  \n\nmsg.values = decode_ac(msg.payload);\nmsg.type = 'Inverter AC'\nmsg.node = 1;\nmsg.packet_type = 2;\nreturn msg;\nfunction decode_ac(packet){\n\tvar ac = {\t\n\t\tbf_factor: packet.readInt8(2+0)\n\t    ,inverter_factor: packet.readUInt8(2+1)\n\t    ,mains_volt: packet.readInt16LE(2+5)/100\n\t\t,mains_current : packet.readInt16LE(2+7)/100 //((packet[2+7])+(packet[2+8]*255))/100\n\t\t,inverter_voltage : packet.readInt16LE(2+9)/100 //((packet[2+9])+(packet[2+10]*255))/100\n\t\t,inverter_current : packet.readInt16LE(2+11)/100 // ((packet[2+11])+(packet[2+12]*255))/100\n\t\t,mains_period : 10/(packet.readUInt8(2+13)*0.0010235414534288639)\n\t\t\n\t}\n\t\n\tac['mains_watts'] = (ac.mains_current * ac.mains_volt * ac.bf_factor);\n\tac['inverter_watts'] = (ac.inverter_voltage * ac.inverter_current * ac.inverter_factor);\n\tac['InverterWattsOut'] = ac['inverter_watts'] \n\t\n\treturn ac;\n}\n}catch(e){\nconsole.log(e)\n}",
+        "outputs": 1,
+        "x": 795.857177734375,
+        "y": 920.5714111328125,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "73261369.8cd9ec",
+                "e24761b5.0a17f8"
+            ]
+        ]
+    },
+    {
+        "id": "9bc3e872.643c18",
+        "type": "function",
+        "name": "Decode DC Frame",
+        "func": "try {\n\n\n\nmsg.values = decode_dc(msg.payload)\nmsg.type = 'Inverter DC'\nmsg.node = 1;\nmsg.packet_type = 1;\nreturn msg;\n\nfunction decode_dc(packet){\n\tvar dc = {\n\t\t\n\t\tbat_volt: packet.readInt16LE(2+5)/100 //cket[2+5])+packet[2+6]*255)/100\n\t\t,bat_current_used :  ((packet[2+7])+(packet[2+8]*255)+(packet[2+9]*255*255))/10\n\t\t,bat_current_charge : ((packet[2+10])+(packet[2+11]*255)+(packet[2+12]*255*255))/10\n\t\t,bat_inverter_period : 10/((packet.readUInt8(2+13)+256)*0.0005099)\n\t\t\n\t}\n\t\n\tdc['bat_watts'] = (dc.bat_current_used * dc.bat_volt);\n\tdc['bat_charge_watts'] = (dc.bat_current_charge * dc.bat_volt);\n\t\n\treturn dc;\n}\n\n\n\n}\ncatch(e){\nconsole.log(e)\n}\n",
+        "outputs": 1,
+        "x": 793.857177734375,
+        "y": 738.5714111328125,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "c8c00b1.f373ff8",
+                "73261369.8cd9ec"
+            ]
+        ]
+    },
+    {
+        "id": "3eb1a61e.c14e5a",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 567.0000228881836,
+        "y": 930.4285488128662,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "66796d31.998694",
+        "type": "function",
+        "name": "Build EmonCMS url",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n//expects JSON payload and destination specified in topic\nvar diff = 0;\nif(context.lastrun !== undefined){\n\n\tdiff = (new Date()/1000) - context.lastrun;\n\n\tif(diff < 10)\n\t{\n\t\tbla = \"diff = \" + diff;\n\t\treturn [null,bla]\n\t}\n}\n\ncontext.lastrun = new Date()/1000;\n\n\nvar key = \"2e71299e446a8a260c3967b38a50470d\";\n\n//destination will be last part node of topic\nvar values = JSON.stringify(msg.values);;\nvar node = msg.node;\n//console.log(values);\n\nif(isNaN(node))\n{\n//not a valid destination\nreturn null;\n}\n\nmsg.url =\"http://emoncms.org/input/post.json?node=\";\nmsg.url += node;\nmsg.url += \"&json=\";\nmsg.url += values;\nmsg.url += \"&apikey=\";\nmsg.url += key;\n\nif(msg.timestamp !== undefined){\n\tmsg.url += \"&time=\"+msg.timestamp\n}else{\n\tmsg.url += \"&time=\"+Math.floor(Date.now() / 1000)\n}\n//console.log(msg.url);\n\nreturn [msg ,\"posted: \" +diff];",
+        "outputs": "2",
+        "x": 1292.607177734375,
+        "y": 742.0714721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "cd4034b9.32bfc8",
+                "242367fd.dbdc98"
+            ],
+            [
+                "e570a4c2.1a8f58"
+            ]
+        ]
+    },
+    {
+        "id": "cd4034b9.32bfc8",
+        "type": "http request",
+        "name": "HTTP GET to EmonCMS.org",
+        "method": "GET",
+        "url": "",
+        "x": 1543.52392578125,
+        "y": 663.8214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "6208d039.9df73"
+            ]
+        ]
+    },
+    {
+        "id": "6208d039.9df73",
+        "type": "debug",
+        "name": "EmonCMS HTTP Request Result",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1799.52392578125,
+        "y": 664.6548461914062,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "c8c00b1.f373ff8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 834.857177734375,
+        "y": 809.3214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "5f91353a.a06ecc",
+        "type": "debug",
+        "name": "EmonCMS URL",
+        "active": false,
+        "complete": "true",
+        "x": 1752.107177734375,
+        "y": 737.3214721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "242367fd.dbdc98",
+        "type": "function",
+        "name": "Debug EmonCMS URL",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n\nreturn msg.url;",
+        "outputs": 1,
+        "x": 1535.857177734375,
+        "y": 746.0714721679688,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "5f91353a.a06ecc"
+            ]
+        ]
+    },
+    {
+        "id": "cd835565.327ca8",
+        "type": "serial out",
+        "name": "Mk2_out",
+        "serial": "859db95b.7a6248",
+        "x": 1099.5714797973633,
+        "y": 29.142850875854492,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "710ec452.8ef13c",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1031.4127349853516,
+        "y": 96.74605178833008,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "b3918641.4c6e78",
+        "type": "function",
+        "name": "Make Command",
+        "func": "\ncmd = msg.payload;\ncmd = cmd.charCodeAt(0);\ndata = msg.topic\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\nif(data !==''){\n\tpacket.push(data);\n}\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n//checksum = 0xB3;\n\n\n//Add Checksum to end\npacket.push(checksum);\n\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 827.71435546875,
+        "y": 52.42856216430664,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "710ec452.8ef13c",
+                "cd835565.327ca8"
+            ]
+        ]
+    },
+    {
+        "id": "970ed10f.68f13",
+        "type": "change",
+        "action": "replace",
+        "property": "topic",
+        "from": "",
+        "to": "0",
+        "reg": false,
+        "name": "DC",
+        "x": 335.1111755371094,
+        "y": 139.50794982910156,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "4a5a9607.b5a568"
+            ]
+        ]
+    },
+    {
+        "id": "4a5a9607.b5a568",
+        "type": "delay",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "150",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 476.825439453125,
+        "y": 138.7936553955078,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "59acdf5a.a6532",
+        "type": "change",
+        "action": "replace",
+        "property": "topic",
+        "from": "",
+        "to": "1",
+        "reg": false,
+        "name": "AC",
+        "x": 334.2539978027344,
+        "y": 97.65081024169922,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "4e395bcf.b1c6a4",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "checksum",
+        "x": 455,
+        "y": 721,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "c0e0e618.3f1f18",
+        "type": "change",
+        "action": "replace",
+        "property": "payload",
+        "from": "",
+        "to": "L",
+        "reg": false,
+        "name": "LED",
+        "x": 333.111083984375,
+        "y": 185.22222900390625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "d01540ac.2feac"
+            ]
+        ]
+    },
+    {
+        "id": "d01540ac.2feac",
+        "type": "delay",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "350",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 476.111083984375,
+        "y": 186.22222900390625,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "73261369.8cd9ec",
+        "type": "function",
+        "name": "Merge Packets",
+        "func": "\n//Set defaults if not set yet\nif(context.dc === undefined){\n\tcontext.dc = false;\n}\nif(context.led === undefined){\n\tcontext.ac = false;\n}\nif(context.packet === undefined){\n\tcontext.packet = {};\n}\nif(context.led === undefined){\n\tcontext.led = false;\n}\n\nif(msg.packet_type === 1){\n\n\tcontext.dc = true;\n}\n\nif (msg.packet_type === 2){\n\tcontext.ac = true;\n}\nif (msg.packet_type === 3){\n\tcontext.led = true;\n}\n\n\nObject.keys(msg.values).forEach(function(key) {\n  \t\tcontext.packet[key] = msg.values[key];\n\n});\n\n\n\nif(context.dc && context.ac && context.led){\n\t//var newMsg = { values: context.packet }\n    msg.values = context.packet;\n    context.ac = false;\n    context.dc = false;\n    delete context.packet;\n    \n\treturn msg;\n}else {\n\treturn [null]\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 1159,
+        "y": 864,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "c3d0adb7.3c2f5",
+                "66796d31.998694",
+                "52af12f1.7393c4"
+            ]
+        ]
+    },
+    {
+        "id": "c3d0adb7.3c2f5",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1331,
+        "y": 866,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "e570a4c2.1a8f58",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1506,
+        "y": 832,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "6d2cbdb4.92d344",
+        "type": "function",
+        "name": "Next Packet",
+        "func": "delete msg.payload;\nif(context.count == undefined || context.count > 3){\n\tcontext.count = 1\n}\nif(context.running == undefined){\n\tcontext.running = false;\n}\n//if already running, return .\nif(context.running === true){\n\treturn [null]\n}\ncontext.running = true;\n// AC\nif(context.count === 1){\n\tmsg.topic = 1;\n\tmsg.payload = \"F\";\n\t\n}\n//DC\nif(context.count === 2){\n\tmsg.topic = 0;\n\tmsg.payload = \"F\";\n\t\n}\nif(context.count === 3){\n\tmsg.topic = '';\n\tmsg.payload = \"L\";\n\t\n}\n\ncontext.count += 1\ncontext.running = false;\nreturn msg;",
+        "outputs": 1,
+        "x": 415.2221984863281,
+        "y": 272.2221984863281,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "c3691bde.3c96e8",
+                "b3918641.4c6e78"
+            ]
+        ]
+    },
+    {
+        "id": "c3691bde.3c96e8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 577.2222290039062,
+        "y": 272.1111145019531,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "df784daa.2087b",
+        "type": "inject",
+        "name": "Manual Trigger",
+        "topic": "",
+        "payload": "F",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 154,
+        "y": 146,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "59acdf5a.a6532",
+                "970ed10f.68f13",
+                "c0e0e618.3f1f18"
+            ]
+        ]
+    },
+    {
+        "id": "e24761b5.0a17f8",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 830,
+        "y": 859,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "52af12f1.7393c4",
+        "type": "function",
+        "name": "Emoncms Local on Monitor",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n//expects JSON payload and destination specified in topic\n\nvar key = \"4118b9bbc65cfe1dae65c299064646ee\";\n\n//destination will be last part node of topic\nvar values = JSON.stringify(msg.values);;\nvar node = msg.node;\n//console.log(values);\n\nif(isNaN(node))\n{\n//not a valid destination\nreturn null;\n}\n\nmsg.url =\"http://monitor/emoncms/input/post.json?node=\";\nmsg.url += node;\nmsg.url += \"&json=\";\nmsg.url += values;\nmsg.url += \"&apikey=\";\nmsg.url += key;\n\nif(msg.timestamp !== undefined){\n\tmsg.url += \"&time=\"+msg.timestamp\n}else{\n\tmsg.url += \"&time=\"+Math.floor(Date.now() / 1000)\n}\n//console.log(msg.url);\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 1298,
+        "y": 980,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "bb388df2.7dbbf8"
+            ]
+        ]
+    },
+    {
+        "id": "bb388df2.7dbbf8",
+        "type": "http request",
+        "name": "HTTP GET to EmonCMS",
+        "method": "GET",
+        "url": "",
+        "x": 1557.916748046875,
+        "y": 980.75,
+        "z": "c3aed0d3.3ce58",
+        "wires": [
+            [
+                "7b73ce2c.919588"
+            ]
+        ]
+    },
+    {
+        "id": "7b73ce2c.919588",
+        "type": "debug",
+        "name": "EmonCMS HTTP Request Result",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 1662.916748046875,
+        "y": 1098.5833740234375,
+        "z": "c3aed0d3.3ce58",
+        "wires": []
+    },
+    {
+        "id": "eb8854a8.aabc98",
+        "type": "inject",
+        "name": "Set Address 0",
+        "topic": "0",
+        "payload": "F",
+        "payloadType": "none",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 108,
+        "y": 43,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "c2bc71e4.f2df1"
+            ]
+        ]
+    },
+    {
+        "id": "b760a1f4.312918",
+        "type": "function",
+        "name": "W State",
+        "func": "\ncmd = \"W\"\ncmd = cmd.charCodeAt(0);\ncmd2 = 0x0E;\nstate =msg.payload\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\npacket.push(cmd2);\npacket.push(state);\npacket.push(0);\n\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n\n//Add Checksum to end\npacket.push(checksum);\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 445,
+        "y": 246,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "f04a0e3e.ecfc18"
+            ]
+        ]
+    },
+    {
+        "id": "f04a0e3e.ecfc18",
+        "type": "serial out",
+        "name": "MK2 USB",
+        "serial": "859db95b.7a6248",
+        "x": 644,
+        "y": 252,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "57ea2357.0e3c2c",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 596,
+        "y": 65,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "c2bc71e4.f2df1",
+        "type": "function",
+        "name": "Set Device Address to 0",
+        "func": "cmd = \"A\"\ncmd = cmd.charCodeAt(0);\naction = 1;\naddress = msg.topic;\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\npacket.push(action);\npacket.push(address);\n\n\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n\n//Add Checksum to end\npacket.push(checksum);\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 358,
+        "y": 73,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "57ea2357.0e3c2c",
+                "8fc2960a.42851"
+            ]
+        ]
+    },
+    {
+        "id": "64e0823b.be34ec",
+        "type": "inject",
+        "name": "Get State",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 91,
+        "y": 238,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "b760a1f4.312918"
+            ]
+        ]
+    },
+    {
+        "id": "f438ad3e.5c5f9",
+        "type": "serial in",
+        "name": "Mk2",
+        "serial": "859db95b.7a6248",
+        "x": 93,
+        "y": 1209,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "9a957ddd.62c76"
+            ]
+        ]
+    },
+    {
+        "id": "9a957ddd.62c76",
+        "type": "function",
+        "name": "Decode MK2 String",
+        "func": "\ncommand = String.fromCharCode(msg.payload[2]);\n\nchecksum = 0;\n\nfor (i=0;i<msg.payload.length;i++){\n  checksum = (checksum + msg.payload.readInt8(i))%0x100 ;\n}\nmsg.checksum = checksum\nif(checksum != 0){\n\treturn null\n}\n\nif(msg.payload[1] == 255){ \n\tswitch (command){\n\t\tcase \"A\": //Address\t\t\t\n\t\t\t\n\t\t\tmsg.value = [msg.payload[3],msg.payload[4]];\n\t\t\treturn [msg,null,null,null]\n\t\tbreak;\n\t\tcase 'W': // Version\n\t\t   msg.value = [msg.payload[3],msg.payload[4],msg.payload[5],msg.payload[6],msg.payload[7],msg.payload[8]];\n\t\t   return [null,msg,null,null]\t\t  \n\t\t \n\t\tbreak;\n\t\t\n\t\tdefault:\n\t\t\tmsg.type=0;\n\t\tbreak;\n\t}\n\treturn [msg,null,msg]\n}\n\n\n",
+        "outputs": "2",
+        "x": 346,
+        "y": 1200,
+        "z": "fe934024.23911",
+        "wires": [
+            [],
+            [
+                "55bbabe2.8a6ccc",
+                "1e20020f.7dce0e"
+            ]
+        ]
+    },
+    {
+        "id": "55bbabe2.8a6ccc",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 573,
+        "y": 1300,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "1e20020f.7dce0e",
+        "type": "function",
+        "name": "Decode W Result",
+        "func": "if (typeof context.ramscale ==\"undefined\"){\n\tcontext.ramscale = [];\n}\nvar newMsg = {} ;\n\nswitch (msg.value[0]){\n\n\tcase 0x94: //148  State Result\n\t\tnewMsg = state();\n\tbreak;\n\tcase 0x85://133\n\tcase 0x90://144\n\t\tnewMsg = raminfo(msg.value);\n\t\tbreak;\n\tdefault:\n\tcase 0x8E: //142\n\tcase 0x8F: //143\n\t\tnewMsg = ram_interpret(msg.value);\n\tbreak;\n\t\t\n\tbreak;\n\n}\n\nreturn newMsg;\n\nfunction state (){\n\tvar state =[];\n\tstate[0] = \"Down\";\n\tstate[1] = \"Startup\";\n\tstate[2] = \"Off\";\n\tstate[3] = \"Device in slave mode\";\n\tstate[4] = \"Invert Full\";\n\tstate[5] = \"Invert Half\";\n\tstate[6] = \"Invert AES\";\n\tstate[7] = \"Power Assist\";\n\tstate[8] = \"Bypass\";\n\tstate[9] = \"Charge\";\n\t\n\tvar charge_state  = [];\n\tcharge_state[0] = \"Charge Initializing\"\n\tcharge_state[1] = \"Charge Bulk\"\n\tcharge_state[2] = \"Charge Absorption\"\n\tcharge_state[3] = \"Charge Float\"\n\tcharge_state[4] = \"Charge Storage\"\n\tcharge_state[5] = \"Charge Repeated Absorption\"\n\tcharge_state[6] = \"Charge Forced Absorption\"\n\tcharge_state[7] = \"Charge Equalise\"\n\tcharge_state[8] = \"Charge Bulk stopped\"\n\t\n\tmsg.payload  = \"System Status: \" + state[msg.value[1]] + \" and \" +  charge_state[msg.value[2]];\n\t\n\t\n\treturn msg;\n}\n\n\nfunction raminfo(value){\n\n\tif(msg.value[0] == 0x90){\n\t\tmsg.payload = \"Command not supported:\"+msg.value[1];\n\t\treturn msg;\n\t}\n\t\n\tvalue = new Buffer(value,'hex');\n\t//Read Signed value\n\tsigned = value.readInt16LE(1);\n\t//Read Unsigned Value\n\tunsinged = value.readUInt16LE(1);\n\t//Assign\n\tmsg.values = {signed:signed,unsigned:unsinged};\n\t\n\t\n\treturn msg;\n}\n\nfunction ram_interpret(value){\n\tif(value[0] == 0x8e) //Scale\n\t{\n\t\t//console.log(typeof value);\n\t\tscale = new Buffer(value,'hex');\n\t\tmsg.signed = scale.readInt16LE(1);\n\t\t//Read Signed value\n\t\tscale = Math.abs(scale.readInt16LE(1))\n\t\tif (scale >= 0x4000){\n\t\t\t//v = 32768 – value; \n\t\t\tscale = 1/(32768 - scale);\n\t\n\t\t}else\n\t\t{\n\t\t\tscale = \"\"\n\t\t}\n\t\tcontext.ramscale[msg.value[0]] = scale;\n\t\t\n\t\tmsg.scale =  scale; \n\t}\n\t\n\tif(value[3] == 0x8F) //Offset\n\t{\n\t\t//console.log(typeof value);\n\t\toffset = new Buffer(value,'hex');\n\t\t//Read Signed value\n\t\toffset = Math.abs(offset.readInt16LE(4))\t\n\t\t\n\t\tcontext.ramscale[msg.value[0]] = offset;\n\t\tmsg.offset = offset; \n\t}\n\t\n\treturn {payload:msg}\n\t\n\n}\n",
+        "outputs": 1,
+        "x": 591,
+        "y": 1121,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "317f55c8.12689a"
+            ]
+        ]
+    },
+    {
+        "id": "317f55c8.12689a",
+        "type": "debug",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 795,
+        "y": 1118,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "4ad40d60.02f334",
+        "type": "inject",
+        "name": "Force into Equalise",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 121,
+        "y": 303,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "b760a1f4.312918"
+            ]
+        ]
+    },
+    {
+        "id": "2e919f0f.37d85",
+        "type": "inject",
+        "name": "Force into Float",
+        "topic": "",
+        "payload": "3",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 108,
+        "y": 356,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "b760a1f4.312918"
+            ]
+        ]
+    },
+    {
+        "id": "f0a68dac.73fb38",
+        "type": "inject",
+        "name": "Force into Absorption",
+        "topic": "",
+        "payload": "2",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 425,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "b760a1f4.312918"
+            ]
+        ]
+    },
+    {
+        "id": "1ad06a3b.022476",
+        "type": "function",
+        "name": "Command Read RAM Var",
+        "func": "\ncmd = \"W\"\ncmd = cmd.charCodeAt(0);\ncmd2 = 0x30;\nlow = msg.payload;\nhigh = 0;\n\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\npacket.push(cmd2);\npacket.push(low);\npacket.push(high);\n\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n\n//Add Checksum to end\npacket.push(checksum);\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 433,
+        "y": 553,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "685f17e2.96485",
+                "724b84e1.ff9264"
+            ]
+        ]
+    },
+    {
+        "id": "abc99cfa.3cb37",
+        "type": "inject",
+        "name": "Get SoC",
+        "topic": "",
+        "payload": "13",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 120,
+        "y": 629,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "1ad06a3b.022476"
+            ]
+        ]
+    },
+    {
+        "id": "685f17e2.96485",
+        "type": "serial out",
+        "name": "MK2 USB",
+        "serial": "859db95b.7a6248",
+        "x": 739,
+        "y": 656,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "8fc2960a.42851",
+        "type": "serial out",
+        "name": "MK2 USB",
+        "serial": "859db95b.7a6248",
+        "x": 641,
+        "y": 121,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "724b84e1.ff9264",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 717,
+        "y": 575,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "75378bc3.5b1d4c",
+        "type": "function",
+        "name": "Get RAM Var interpretation",
+        "func": "\ncmd = \"W\"\ncmd = cmd.charCodeAt(0);\ncmd2 = 0x36;\nlow = msg.payload;\nhigh = 0;\n\n\nvar packet = [];\npacket.push(0xff);\npacket.push(cmd);\npacket.push(cmd2);\npacket.push(low);\npacket.push(high);\n\n\nlength = packet.length;\n//Add Length to begining\npacket.unshift(length)\n//Calculate Checksum\nchecksum = 0;\n\npacket.forEach(function (byte) {\n  checksum -= byte;\n}) \n\n\n//Add Checksum to end\npacket.push(checksum);\n\n//Make it a Buffer and assign to payload\nmsg.payload = new Buffer(packet,'hex');\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 433,
+        "y": 806,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "76229cee.529f64",
+                "7d467b7b.db317c"
+            ]
+        ]
+    },
+    {
+        "id": "5ee85c99.f1ba7c",
+        "type": "inject",
+        "name": "Get SoC",
+        "topic": "",
+        "payload": "13",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 120,
+        "y": 803,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "75378bc3.5b1d4c"
+            ]
+        ]
+    },
+    {
+        "id": "76229cee.529f64",
+        "type": "serial out",
+        "name": "MK2 USB",
+        "serial": "859db95b.7a6248",
+        "x": 717,
+        "y": 850,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "7d467b7b.db317c",
+        "type": "debug",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "true",
+        "x": 707,
+        "y": 805,
+        "z": "fe934024.23911",
+        "wires": []
+    },
+    {
+        "id": "f13d2a4a.28a5b8",
+        "type": "inject",
+        "name": "Get Current Info",
+        "topic": "",
+        "payload": "4",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 146,
+        "y": 868,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "75378bc3.5b1d4c"
+            ]
+        ]
+    },
+    {
+        "id": "1a2f4d65.d310c3",
+        "type": "inject",
+        "name": "Get Current Info",
+        "topic": "",
+        "payload": "4",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 126,
+        "y": 575,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "1ad06a3b.022476"
+            ]
+        ]
+    },
+    {
+        "id": "ed929c44.1f7bc8",
+        "type": "function",
+        "name": "Emoncms Local on Monitor",
+        "func": "// The received message is stored in 'msg'\n// It will have at least a 'payload' property:\n//   console.log(msg.payload);\n// The 'context' object is available to store state\n// between invocations of the function\n//   context = {};\n\n//expects JSON payload and destination specified in topic\n\nvar key = \"4118b9bbc65cfe1dae65c299064646ee\";\n\n//destination will be last part node of topic\nvar values = JSON.stringify(msg.values);;\nvar node = msg.node;\n//console.log(values);\n\nif(isNaN(node))\n{\n//not a valid destination\nreturn null;\n}\n\nmsg.url =\"http://monitor/emoncms/input/post.json?node=\";\nmsg.url += node;\nmsg.url += \"&json=\";\nmsg.url += values;\nmsg.url += \"&apikey=\";\nmsg.url += key;\n\nif(msg.timestamp !== undefined){\n\tmsg.url += \"&time=\"+msg.timestamp\n}else{\n\tmsg.url += \"&time=\"+Math.floor(Date.now() / 1000)\n}\n//console.log(msg.url);\n\nreturn [msg];",
+        "outputs": "1",
+        "x": 771,
+        "y": 1212,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "6a751431.994f14"
+            ]
+        ]
+    },
+    {
+        "id": "6a751431.994f14",
+        "type": "http request",
+        "name": "HTTP GET to EmonCMS",
+        "method": "GET",
+        "url": "",
+        "x": 1030.916748046875,
+        "y": 1212.75,
+        "z": "fe934024.23911",
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ecd9c441.198df8",
+        "type": "inject",
+        "name": "Set Address 3",
+        "topic": "3",
+        "payload": "F",
+        "payloadType": "none",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 111,
+        "y": 111,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "c2bc71e4.f2df1"
+            ]
+        ]
+    },
+    {
+        "id": "91e57dce.10377",
+        "type": "inject",
+        "name": "Get Inverter frequency info",
+        "topic": "",
+        "payload": "7",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 187,
+        "y": 954,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "75378bc3.5b1d4c"
+            ]
+        ]
+    },
+    {
+        "id": "9bef439a.c4a8f8",
+        "type": "inject",
+        "name": "Get Inverter frequency ",
+        "topic": "",
+        "payload": "7",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 170,
+        "y": 691,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "1ad06a3b.022476"
+            ]
+        ]
+    },
+    {
+        "id": "5d486b6c.06ac54",
+        "type": "inject",
+        "name": "Get Mains frequency info",
+        "topic": "",
+        "payload": "8",
+        "payloadType": "string",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 201,
+        "y": 1017,
+        "z": "fe934024.23911",
+        "wires": [
+            [
+                "75378bc3.5b1d4c"
+            ]
+        ]
+    }
+]
